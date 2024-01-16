@@ -27,10 +27,23 @@ const Account: React.FC = () => {
     "creationDate",
   ];
 
+  const sortOptions = [
+    { key: "newest-first", label: "Newest first" },
+    { key: "oldest-first", label: "Oldest first" },
+    { key: "alphabetical", label: "Alphabetical" },
+    { key: "id-ascending", label: "ID ascending" },
+    { key: "id-descending", label: "ID descending" },
+  ];
+
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
   const [filter, setFilter] = useState<string>("");
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: "asc" | "desc";
+  } | null>(null);
+  // const [sortOption, setSortOption] = useState<string | undefined>(undefined);
 
   const handleAccountClick = (accoundId: string) => {
     setSelectedAccountId(accoundId);
@@ -45,6 +58,32 @@ const Account: React.FC = () => {
   const getProfilesForAccount = (accountId: string) => {
     return profilesData.filter((profile) => profile.accountId === accountId);
   };
+
+  const sortOptionsMap: Record<string, (a: Account, b: Account) => number> = {
+    "": () => 0,
+    "newest-first": (a, b) =>
+      new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime(),
+    "oldest-first": (a, b) =>
+      new Date(a.creationDate).getTime() - new Date(b.creationDate).getTime(),
+    alphabetical: (a, b) => a.email.localeCompare(b.email),
+    "id-ascending": (a, b) => parseInt(a.accountId) - parseInt(b.accountId),
+    "id-descending": (a, b) => parseInt(b.accountId) - parseInt(a.accountId),
+  };
+
+  const handleSortChange = (selectedOption: string) => {
+    setSortConfig({ key: selectedOption, direction: "asc" });
+  };
+
+  const sortedAccounts = [...filteredAccounts];
+
+  if (sortConfig) {
+    const sortFunction = sortOptionsMap[sortConfig.key];
+    if (sortFunction) {
+      sortedAccounts.sort(
+        (a, b) => sortFunction(a, b) * (sortConfig.direction === "asc" ? 1 : -1)
+      );
+    }
+  }
 
   return (
     <>
@@ -61,6 +100,17 @@ const Account: React.FC = () => {
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />
+          <select
+            value={sortConfig?.key}
+            onChange={(e) => handleSortChange(e.target.value)}
+          >
+            <option value="">Sort by...</option>
+            {sortOptions.map((option) => (
+              <option key={option.key} value={option.key}>
+                {option.label}
+              </option>
+            ))}
+          </select>
           <table>
             <thead>
               <tr>
@@ -70,7 +120,7 @@ const Account: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredAccounts?.map((account) => (
+              {sortedAccounts?.map((account) => (
                 <tr
                   key={account.accountId}
                   onClick={() => handleAccountClick(account.accountId)}
