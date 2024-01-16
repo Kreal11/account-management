@@ -8,7 +8,7 @@ interface TableDataCellProps {
 const TableDataCell: React.FC<TableDataCellProps> = ({ values, fields }) => {
   return (
     <>
-      {fields.map((field, index) => (
+      {fields.map((_, index) => (
         <td key={index}>{values[index]}</td>
       ))}
     </>
