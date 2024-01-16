@@ -1,6 +1,7 @@
 import React from "react";
 import TableHeader from "../tableHeader/TableHeader";
 import TableDataCell from "../tableDataCell/TableDataCell";
+import accountsData from "../../data/accountsData.json";
 
 interface AccountProps {
   accounts: Array<{
@@ -11,7 +12,7 @@ interface AccountProps {
   }>;
 }
 
-const Account: React.FC<AccountProps> = ({ accounts }) => {
+const Account: React.FC = () => {
   const headers = [
     { name: "Account ID", id: 1 },
     { name: "Email", id: 2 },
@@ -29,14 +30,14 @@ const Account: React.FC<AccountProps> = ({ accounts }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {accounts?.map((account) => (
+        {accountsData?.map((account) => (
+          <tr key={account.accountId}>
             <TableDataCell
               key={account.accountId}
               values={Object.values(account)}
             />
-          ))}
-        </tr>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
