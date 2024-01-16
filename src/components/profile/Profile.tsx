@@ -11,7 +11,7 @@ interface ProfileProps {
     country: string;
     marketplace: string;
   }>;
-  setSelectedAccountId: (accountId: string | null) => void;
+  setSelectedAccountId?: (accountId: string | null) => void;
 }
 
 const Profile: React.FC<ProfileProps> = ({
@@ -37,7 +37,9 @@ const Profile: React.FC<ProfileProps> = ({
   };
 
   const handleBackClick = () => {
-    setSelectedAccountId(null);
+    // if (setSelectedAccountId) {
+    setSelectedAccountId?.(null);
+    // }
     navigate("/accounts");
   };
 
