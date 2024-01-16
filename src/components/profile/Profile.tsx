@@ -3,16 +3,21 @@ import TableHeader from "../tableHeader/TableHeader";
 import TableDataCell from "../tableDataCell/TableDataCell";
 import campaignsData from "../../data/campaignsData.json";
 import Campaign from "../campaign/Campaign";
+import { useNavigate } from "react-router-dom";
 
 interface ProfileProps {
-  profiles: Array<{
+  profiles?: Array<{
     profileId: string;
     country: string;
     marketplace: string;
   }>;
+  setSelectedAccountId: (accountId: string | null) => void;
 }
 
-const Profile: React.FC<ProfileProps> = ({ profiles }) => {
+const Profile: React.FC<ProfileProps> = ({
+  profiles,
+  setSelectedAccountId,
+}) => {
   const headers = [
     { name: "Profile ID", id: 1 },
     { name: "Country", id: 2 },
@@ -25,8 +30,15 @@ const Profile: React.FC<ProfileProps> = ({ profiles }) => {
     null
   );
 
+  const navigate = useNavigate();
+
   const handleProfileClick = (profileId: string) => {
     setSelectedProfileId(profileId);
+  };
+
+  const handleBackClick = () => {
+    setSelectedAccountId(null);
+    navigate("/accounts");
   };
 
   const getCampaignsForProfile = (profileId: string) => {
@@ -35,6 +47,7 @@ const Profile: React.FC<ProfileProps> = ({ profiles }) => {
 
   return (
     <>
+      <button onClick={handleBackClick}>Back to Accounts</button>
       {selectedProfileId ? (
         <Campaign campaigns={getCampaignsForProfile(selectedProfileId)} />
       ) : (

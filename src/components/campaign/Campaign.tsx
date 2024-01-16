@@ -3,7 +3,7 @@ import TableHeader from "../tableHeader/TableHeader";
 import TableDataCell from "../tableDataCell/TableDataCell";
 
 interface CampaignProps {
-  campaigns: Array<{
+  campaigns?: Array<{
     campaignId: string;
     clicks: number;
     cost: number;

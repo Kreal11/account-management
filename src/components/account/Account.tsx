@@ -39,7 +39,10 @@ const Account: React.FC = () => {
   return (
     <>
       {selectedAccountId ? (
-        <Profile profiles={getProfilesForAccount(selectedAccountId)} />
+        <Profile
+          profiles={getProfilesForAccount(selectedAccountId)}
+          setSelectedAccountId={setSelectedAccountId}
+        />
       ) : (
         <table>
           <thead>
