@@ -28,6 +28,7 @@ const Account: React.FC = () => {
   ];
 
   const sortOptions = [
+    { key: "", label: "Sort by...", disabled: true },
     { key: "newest-first", label: "Newest first" },
     { key: "oldest-first", label: "Oldest first" },
     { key: "alphabetical", label: "Alphabetical" },
@@ -43,7 +44,6 @@ const Account: React.FC = () => {
     key: string;
     direction: "asc" | "desc";
   } | null>(null);
-  // const [sortOption, setSortOption] = useState<string | undefined>(undefined);
 
   const handleAccountClick = (accoundId: string) => {
     setSelectedAccountId(accoundId);
@@ -104,7 +104,6 @@ const Account: React.FC = () => {
             value={sortConfig?.key}
             onChange={(e) => handleSortChange(e.target.value)}
           >
-            <option value="">Sort by...</option>
             {sortOptions.map((option) => (
               <option key={option.key} value={option.key}>
                 {option.label}

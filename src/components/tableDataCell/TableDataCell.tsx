@@ -9,7 +9,7 @@ const TableDataCell: React.FC<TableDataCellProps> = ({ values, fields }) => {
   return (
     <>
       {fields.map((_, index) => (
-        <td key={index}>{values[index]}</td>
+        <td key={values[index]}>{values[index]}</td>
       ))}
     </>
   );
