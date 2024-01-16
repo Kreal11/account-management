@@ -1,0 +1,72 @@
+[
+  {
+    "profileId": "p1",
+    "campaignId": "c1",
+    "clicks": 100,
+    "cost": 500,
+    "date": "2024-01-01"
+  },
+  {
+    "profileId": "p1",
+    "campaignId": "c2",
+    "clicks": 150,
+    "cost": 700,
+    "date": "2024-01-02"
+  },
+  {
+    "profileId": "p2",
+    "campaignId": "c3",
+    "clicks": 120,
+    "cost": 600,
+    "date": "2024-01-01"
+  },
+  {
+    "profileId": "p2",
+    "campaignId": "c4",
+    "clicks": 80,
+    "cost": 400,
+    "date": "2024-01-02"
+  },
+  {
+    "profileId": "p3",
+    "campaignId": "c5",
+    "clicks": 200,
+    "cost": 800,
+    "date": "2024-01-01"
+  },
+  {
+    "profileId": "p3",
+    "campaignId": "c6",
+    "clicks": 90,
+    "cost": 450,
+    "date": "2024-01-02"
+  },
+  {
+    "profileId": "p4",
+    "campaignId": "c7",
+    "clicks": 180,
+    "cost": 900,
+    "date": "2024-01-01"
+  },
+  {
+    "profileId": "p4",
+    "campaignId": "c8",
+    "clicks": 110,
+    "cost": 550,
+    "date": "2024-01-02"
+  },
+  {
+    "profileId": "p5",
+    "campaignId": "c9",
+    "clicks": 130,
+    "cost": 650,
+    "date": "2024-01-01"
+  },
+  {
+    "profileId": "p5",
+    "campaignId": "c10",
+    "clicks": 160,
+    "cost": 750,
+    "date": "2024-01-02"
+  }
+]

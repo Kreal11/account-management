@@ -2,13 +2,14 @@ import React from "react";
 
 interface TableDataCellProps {
   values: (string | number)[];
+  fields: string[];
 }
 
-const TableDataCell: React.FC<TableDataCellProps> = ({ values }) => {
+const TableDataCell: React.FC<TableDataCellProps> = ({ values, fields }) => {
   return (
     <>
-      {values.map((value, index) => (
-        <td key={index}>{value}</td>
+      {fields.map((field, index) => (
+        <td key={index}>{values[index]}</td>
       ))}
     </>
   );

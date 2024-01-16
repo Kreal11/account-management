@@ -1,0 +1,62 @@
+[
+  {
+    "accountId": "1",
+    "profileId": "p1",
+    "country": "USA",
+    "marketplace": "Amazon"
+  },
+  {
+    "accountId": "1",
+    "profileId": "p2",
+    "country": "Canada",
+    "marketplace": "Etsy"
+  },
+  {
+    "accountId": "2",
+    "profileId": "p3",
+    "country": "UK",
+    "marketplace": "eBay"
+  },
+  {
+    "accountId": "2",
+    "profileId": "p4",
+    "country": "Germany",
+    "marketplace": "Zalando"
+  },
+  {
+    "accountId": "3",
+    "profileId": "p5",
+    "country": "France",
+    "marketplace": "Cdiscount"
+  },
+  {
+    "accountId": "3",
+    "profileId": "p6",
+    "country": "Spain",
+    "marketplace": "MercadoLibre"
+  },
+  {
+    "accountId": "4",
+    "profileId": "p7",
+    "country": "Italy",
+    "marketplace": "Alibaba"
+  },
+  {
+    "accountId": "4",
+    "profileId": "p8",
+    "country": "Japan",
+    "marketplace": "Rakuten"
+  },
+  {
+    "accountId": "5",
+    "profileId": "p9",
+    "country": "Australia",
+    "marketplace": "Kogan"
+  },
+  {
+    "accountId": "5",
+    "profileId": "p10",
+    "country": "Brazil",
+    "marketplace": "MercadoLivre"
+  }
+]

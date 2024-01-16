@@ -19,6 +19,8 @@ const Campaign: React.FC<CampaignProps> = ({ campaigns }) => {
     { name: "Date", id: 4 },
   ];
 
+  const fields = ["campaignId", "clicks", "cost", "date"];
+
   return (
     <table>
       <thead>
@@ -29,14 +31,15 @@ const Campaign: React.FC<CampaignProps> = ({ campaigns }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {campaigns?.map((campaign) => (
+        {campaigns?.map((campaign) => (
+          <tr key={campaign.campaignId}>
             <TableDataCell
               key={campaign.campaignId}
+              fields={fields}
               values={Object.values(campaign)}
             />
-          ))}
-        </tr>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
