@@ -14,6 +14,12 @@ interface ProfileProps {
   setSelectedAccountId?: (accountId: string | null) => void;
 }
 
+type Profile = {
+  profileId: string;
+  country: string;
+  marketplace: string;
+};
+
 const Profile: React.FC<ProfileProps> = ({
   profiles,
   setSelectedAccountId,
@@ -24,11 +30,12 @@ const Profile: React.FC<ProfileProps> = ({
     { name: "Marketplace", id: 3 },
   ];
 
-  const fields = ["profileId", "country", "marketplace"];
+  const fields: (keyof Profile)[] = ["profileId", "country", "marketplace"];
 
   const [selectedProfileId, setSelectedProfileId] = useState<string | null>(
     null
   );
+  const [filter, setFilter] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -37,9 +44,7 @@ const Profile: React.FC<ProfileProps> = ({
   };
 
   const handleBackClick = () => {
-    // if (setSelectedAccountId) {
     setSelectedAccountId?.(null);
-    // }
     navigate("/accounts");
   };
 
@@ -47,35 +52,51 @@ const Profile: React.FC<ProfileProps> = ({
     return campaignsData.filter((campaign) => campaign.profileId === profileId);
   };
 
+  const filteredProfiles: Profile[] | undefined = profiles?.filter((profile) =>
+    fields.some((field) =>
+      profile[field].toLowerCase().trim().includes(filter.toLowerCase().trim())
+    )
+  );
+
   return (
     <>
       <button onClick={handleBackClick}>Back to Accounts</button>
       {selectedProfileId ? (
-        <Campaign campaigns={getCampaignsForProfile(selectedProfileId)} />
+        <Campaign
+          campaigns={getCampaignsForProfile(selectedProfileId)}
+          setSelectedProfileId={setSelectedProfileId}
+        />
       ) : (
-        <table>
-          <thead>
-            <tr>
-              {headers?.map((header) => (
-                <TableHeader key={header.id} {...header} />
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {profiles?.map((profile) => (
-              <tr
-                key={profile.profileId}
-                onClick={() => handleProfileClick(profile.profileId)}
-              >
-                <TableDataCell
-                  key={profile.profileId}
-                  fields={fields}
-                  values={Object.values(profile)}
-                />
+        <>
+          <input
+            type="text"
+            placeholder="Search by any column name"
+            onChange={(e) => setFilter(e.target.value)}
+          />
+          <table>
+            <thead>
+              <tr>
+                {headers?.map((header) => (
+                  <TableHeader key={header.id} {...header} />
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredProfiles?.map((profile) => (
+                <tr
+                  key={profile.profileId}
+                  onClick={() => handleProfileClick(profile.profileId)}
+                >
+                  <TableDataCell
+                    key={profile.profileId}
+                    fields={fields}
+                    values={fields.map((field) => profile[field])}
+                  />
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
     </>
   );

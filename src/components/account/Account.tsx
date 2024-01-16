@@ -5,15 +5,6 @@ import accountsData from "../../data/accountsData.json";
 import profilesData from "../../data/profilesData.json";
 import Profile from "../profile/Profile";
 
-// interface AccountProps {
-//   accounts: Array<{
-//     accountId: string;
-//     email: string;
-//     authToken: string;
-//     creationDate: string;
-//   }>;
-// }
-
 type Account = {
   accountId: string;
   email: string;
