@@ -1,4 +1,5 @@
 import React from "react";
+import "./TableDataCell.css";
 
 interface TableDataCellProps {
   values: (string | number)[];

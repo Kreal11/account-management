@@ -4,6 +4,7 @@ import TableDataCell from "../tableDataCell/TableDataCell";
 import accountsData from "../../data/accountsData.json";
 import profilesData from "../../data/profilesData.json";
 import Profile from "../profile/Profile";
+import "./Account.css";
 
 type Account = {
   accountId: string;
@@ -31,7 +32,7 @@ const Account: React.FC = () => {
     { key: "", label: "Sort by...", disabled: true },
     { key: "newest-first", label: "Newest first" },
     { key: "oldest-first", label: "Oldest first" },
-    { key: "alphabetical", label: "Alphabetical" },
+    { key: "alphabetical-email", label: "Alphabetical by email" },
     { key: "id-ascending", label: "ID ascending" },
     { key: "id-descending", label: "ID descending" },
   ];
@@ -75,7 +76,7 @@ const Account: React.FC = () => {
       new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime(),
     "oldest-first": (a, b) =>
       new Date(a.creationDate).getTime() - new Date(b.creationDate).getTime(),
-    alphabetical: (a, b) => a.email.localeCompare(b.email),
+    "alphabetical-email": (a, b) => a.email.localeCompare(b.email),
     "id-ascending": (a, b) => parseInt(a.accountId) - parseInt(b.accountId),
     "id-descending": (a, b) => parseInt(b.accountId) - parseInt(a.accountId),
   };
@@ -104,23 +105,27 @@ const Account: React.FC = () => {
         />
       ) : (
         <>
-          <input
-            type="text"
-            placeholder="Search by any column"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          />
-          <select
-            value={sortConfig?.key}
-            onChange={(e) => handleSortChange(e.target.value)}
-          >
-            {sortOptions.map((option) => (
-              <option key={option.key} value={option.key}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <table>
+          <div className="search-wrapper">
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Search by any column"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            <select
+              className="form-select"
+              value={sortConfig?.key}
+              onChange={(e) => handleSortChange(e.target.value)}
+            >
+              {sortOptions.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <table className="table">
             <thead>
               <tr>
                 {headers?.map((header) => (
@@ -131,6 +136,7 @@ const Account: React.FC = () => {
             <tbody>
               {sortedAccounts?.map((account) => (
                 <tr
+                  className="table-row"
                   key={account.accountId}
                   onClick={() => handleAccountClick(account.accountId)}
                 >
@@ -144,7 +150,9 @@ const Account: React.FC = () => {
             </tbody>
           </table>
           {filteredAccounts.length > endIndex && (
-            <button onClick={handlePageChange}>See more</button>
+            <button className="btn btn-primary" onClick={handlePageChange}>
+              See more
+            </button>
           )}
         </>
       )}

@@ -92,7 +92,9 @@ const Profile: React.FC<ProfileProps> = ({
 
   return (
     <>
-      <button onClick={handleBackClick}>Back to Accounts</button>
+      <button className="btn btn-primary" onClick={handleBackClick}>
+        Back to Accounts
+      </button>
       {selectedProfileId ? (
         <Campaign
           campaigns={getCampaignsForProfile(selectedProfileId)}
@@ -101,11 +103,13 @@ const Profile: React.FC<ProfileProps> = ({
       ) : (
         <>
           <input
+            className="form-control"
             type="text"
             placeholder="Search by any column"
             onChange={(e) => setFilter(e.target.value)}
           />
           <select
+            className="form-select"
             value={sortConfig?.key}
             onChange={(e) => handleSortChange(e.target.value)}
           >
@@ -115,7 +119,7 @@ const Profile: React.FC<ProfileProps> = ({
               </option>
             ))}
           </select>
-          <table>
+          <table className="table">
             <thead>
               <tr>
                 {headers?.map((header) => (

@@ -93,13 +93,17 @@ const Campaign: React.FC<CampaignProps> = ({
 
   return (
     <>
-      <button onClick={handleBackClick}>Back to Profiles</button>
+      <button className="btn btn-primary" onClick={handleBackClick}>
+        Back to Profiles
+      </button>
       <input
+        className="form-control"
         type="text"
         placeholder="Search by any column"
         onChange={(e) => setFilter(e.target.value)}
       />
       <select
+        className="form-select"
         value={sortConfig?.key}
         onChange={(e) => handleSortChange(e.target.value)}
       >
@@ -109,7 +113,7 @@ const Campaign: React.FC<CampaignProps> = ({
           </option>
         ))}
       </select>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             {headers?.map((header) => (
