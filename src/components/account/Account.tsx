@@ -36,6 +36,8 @@ const Account: React.FC = () => {
     { key: "id-descending", label: "ID descending" },
   ];
 
+  const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
@@ -44,6 +46,10 @@ const Account: React.FC = () => {
     key: string;
     direction: "asc" | "desc";
   } | null>(null);
+
+  const handlePageChange = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   const handleAccountClick = (accoundId: string) => {
     setSelectedAccountId(accoundId);
@@ -54,6 +60,10 @@ const Account: React.FC = () => {
       account[field].toLowerCase().trim().includes(filter.toLowerCase().trim())
     )
   );
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleAccounts = filteredAccounts.slice(0, endIndex);
 
   const getProfilesForAccount = (accountId: string) => {
     return profilesData.filter((profile) => profile.accountId === accountId);
@@ -74,7 +84,7 @@ const Account: React.FC = () => {
     setSortConfig({ key: selectedOption, direction: "asc" });
   };
 
-  const sortedAccounts = [...filteredAccounts];
+  const sortedAccounts = [...visibleAccounts];
 
   if (sortConfig) {
     const sortFunction = sortOptionsMap[sortConfig.key];
@@ -133,6 +143,9 @@ const Account: React.FC = () => {
               ))}
             </tbody>
           </table>
+          {filteredAccounts.length > endIndex && (
+            <button onClick={handlePageChange}>See more</button>
+          )}
         </>
       )}
     </>
