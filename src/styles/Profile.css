@@ -1,0 +1,24 @@
+.profiles-search-wrapper {
+  margin: 0 auto;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.table-row {
+  transition: all 0.5s ease;
+}
+
+.table-row:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.form-control {
+  max-width: 200px;
+}
+
+.form-select {
+  max-width: 200px;
+}

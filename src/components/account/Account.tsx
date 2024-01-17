@@ -4,7 +4,6 @@ import TableDataCell from "../tableDataCell/TableDataCell";
 import accountsData from "../../data/accountsData.json";
 import profilesData from "../../data/profilesData.json";
 import Profile from "../profile/Profile";
-import "./Account.css";
 
 type Account = {
   accountId: string;
@@ -105,7 +104,7 @@ const Account: React.FC = () => {
         />
       ) : (
         <>
-          <div className="search-wrapper">
+          <div className="accounts-search-wrapper">
             <input
               className="form-control"
               type="text"

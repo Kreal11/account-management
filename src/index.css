@@ -1,3 +1,9 @@
+@import "./styles/Account.css";
+@import "./styles/Profile.css";
+@import "./styles/Campaign.css";
+@import "./styles/TableDataCell.css";
+@import "./styles/TableHeader.css";
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

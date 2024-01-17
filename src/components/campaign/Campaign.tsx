@@ -93,26 +93,28 @@ const Campaign: React.FC<CampaignProps> = ({
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleBackClick}>
-        Back to Profiles
-      </button>
-      <input
-        className="form-control"
-        type="text"
-        placeholder="Search by any column"
-        onChange={(e) => setFilter(e.target.value)}
-      />
-      <select
-        className="form-select"
-        value={sortConfig?.key}
-        onChange={(e) => handleSortChange(e.target.value)}
-      >
-        {sortOptions.map((option) => (
-          <option key={option.key} value={option.key}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      <div className="campaigns-search-wrapper">
+        <button className="btn btn-primary" onClick={handleBackClick}>
+          Back to Profiles
+        </button>
+        <input
+          className="form-control"
+          type="text"
+          placeholder="Search by any column"
+          onChange={(e) => setFilter(e.target.value)}
+        />
+        <select
+          className="form-select"
+          value={sortConfig?.key}
+          onChange={(e) => handleSortChange(e.target.value)}
+        >
+          {sortOptions.map((option) => (
+            <option key={option.key} value={option.key}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -123,7 +125,7 @@ const Campaign: React.FC<CampaignProps> = ({
         </thead>
         <tbody>
           {sortedCampaigns?.map((campaign) => (
-            <tr key={campaign.campaignId}>
+            <tr className="table-row" key={campaign.campaignId}>
               <TableDataCell
                 key={campaign.campaignId}
                 fields={fields}

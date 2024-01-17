@@ -92,9 +92,6 @@ const Profile: React.FC<ProfileProps> = ({
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleBackClick}>
-        Back to Accounts
-      </button>
       {selectedProfileId ? (
         <Campaign
           campaigns={getCampaignsForProfile(selectedProfileId)}
@@ -102,23 +99,31 @@ const Profile: React.FC<ProfileProps> = ({
         />
       ) : (
         <>
-          <input
-            className="form-control"
-            type="text"
-            placeholder="Search by any column"
-            onChange={(e) => setFilter(e.target.value)}
-          />
-          <select
-            className="form-select"
-            value={sortConfig?.key}
-            onChange={(e) => handleSortChange(e.target.value)}
-          >
-            {sortOptions.map((option) => (
-              <option key={option.key} value={option.key}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="profiles-search-wrapper">
+            <button
+              className="btn btn-primary btn-back-accounts"
+              onClick={handleBackClick}
+            >
+              Back to Accounts
+            </button>
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Search by any column"
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            <select
+              className="form-select"
+              value={sortConfig?.key}
+              onChange={(e) => handleSortChange(e.target.value)}
+            >
+              {sortOptions.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <table className="table">
             <thead>
               <tr>
@@ -130,6 +135,7 @@ const Profile: React.FC<ProfileProps> = ({
             <tbody>
               {sortedProfiles?.map((profile) => (
                 <tr
+                  className="table-row"
                   key={profile.profileId}
                   onClick={() => handleProfileClick(profile.profileId)}
                 >
