@@ -17,7 +17,6 @@ const router = createBrowserRouter(
       <Route path="/accounts/:accountId/profiles" element={<Profile />} />
       <Route path="/profiles/:profileId/campaigns" element={<Campaign />} />
     </Route>
-    //  <Route path="*" element={<NotFound />} />
   )
 );
 
