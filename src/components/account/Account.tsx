@@ -96,7 +96,7 @@ const Account: React.FC = () => {
         <>
           <input
             type="text"
-            placeholder="Search by any column name"
+            placeholder="Search by any column"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />

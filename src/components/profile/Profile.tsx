@@ -32,9 +32,19 @@ const Profile: React.FC<ProfileProps> = ({
 
   const fields: (keyof Profile)[] = ["profileId", "country", "marketplace"];
 
+  const sortOptions = [
+    { key: "", label: "Sort by...", disabled: true },
+    { key: "alphabetical-country", label: "Alphabetical by Country" },
+    { key: "alphabetical-marketplace", label: "Alphabetical by Marketplace" },
+  ];
+
   const [selectedProfileId, setSelectedProfileId] = useState<string | null>(
     null
   );
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: "asc" | "desc";
+  } | null>(null);
   const [filter, setFilter] = useState<string>("");
 
   const navigate = useNavigate();
@@ -52,11 +62,33 @@ const Profile: React.FC<ProfileProps> = ({
     return campaignsData.filter((campaign) => campaign.profileId === profileId);
   };
 
-  const filteredProfiles: Profile[] | undefined = profiles?.filter((profile) =>
+  const filteredProfiles: Profile[] = (profiles || []).filter((profile) =>
     fields.some((field) =>
       profile[field].toLowerCase().trim().includes(filter.toLowerCase().trim())
     )
   );
+
+  const sortOptionsMap: Record<string, (a: Profile, b: Profile) => number> = {
+    "": () => 0,
+    "alphabetical-country": (a, b) => a.country.localeCompare(b.country),
+    "alphabetical-marketplace": (a, b) =>
+      a.marketplace.localeCompare(b.marketplace),
+  };
+
+  const handleSortChange = (selectedOption: string) => {
+    setSortConfig({ key: selectedOption, direction: "asc" });
+  };
+
+  const sortedProfiles = [...filteredProfiles];
+
+  if (sortConfig) {
+    const sortFunction = sortOptionsMap[sortConfig.key];
+    if (sortFunction) {
+      sortedProfiles.sort(
+        (a, b) => sortFunction(a, b) * (sortConfig.direction === "asc" ? 1 : -1)
+      );
+    }
+  }
 
   return (
     <>
@@ -70,9 +102,19 @@ const Profile: React.FC<ProfileProps> = ({
         <>
           <input
             type="text"
-            placeholder="Search by any column name"
+            placeholder="Search by any column"
             onChange={(e) => setFilter(e.target.value)}
           />
+          <select
+            value={sortConfig?.key}
+            onChange={(e) => handleSortChange(e.target.value)}
+          >
+            {sortOptions.map((option) => (
+              <option key={option.key} value={option.key}>
+                {option.label}
+              </option>
+            ))}
+          </select>
           <table>
             <thead>
               <tr>
@@ -82,7 +124,7 @@ const Profile: React.FC<ProfileProps> = ({
               </tr>
             </thead>
             <tbody>
-              {filteredProfiles?.map((profile) => (
+              {sortedProfiles?.map((profile) => (
                 <tr
                   key={profile.profileId}
                   onClick={() => handleProfileClick(profile.profileId)}
