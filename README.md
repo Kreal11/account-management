@@ -28,4 +28,4 @@ Key Features:
 
 This project aims to provide a user-friendly interface for managing and exploring data across different levels of hierarchy—enabling efficient navigation, sorting, filtering, and pagination for a seamless experience.
 
-Made with 💙 from [Kyrylo Shyrokov](https://github.com/Kreal11)
+Made with 💙 by [Kyrylo Shyrokov](https://github.com/Kreal11)
